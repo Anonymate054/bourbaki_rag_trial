@@ -1,0 +1,5 @@
+Modelo LLM,Latencia Promedio (s),Velocidad (tokens/s),Consumo VRAM (MB),Faithfulness (%),Answer Relevance (%),Overall RAG Score (%)
+Llama-3.2-3B-Instruct,2.73,32.1,2200,90.0,70.7,80.3
+Qwen2.5-3B-Instruct,2.97,29.4,2400,90.0,69.1,79.6
+Phi-3.5-mini-instruct (3.8B),3.53,24.7,2800,90.0,70.5,80.2
+Qwen2.5-7B-Instruct (GGUF Q4),5.41,16.1,5200,90.0,68.4,79.2

@@ -1,0 +1,43 @@
+# Python Environment & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+
+# Sensitive Information & API Credentials
+.env
+.env.local
+*.pem
+*.key
+*.crt
+
+# Session History & User Data
+chat_sessions/
+tunnel_state.json
+
+# Log & Output Files
+*.log
+cloudflared.log
+localtunnel.log
+pinggy.log
+ngrok.log
+
+# Executable Binaries & Setup Files
+*.exe
+*.old
+cloudflared.exe
+bore.exe
+ngrok.exe
+OllamaSetup.exe
+
+# Temporary RPA Test Output Images & Artifacts
+rpa_*.png
+test_rpa_*.png
+
+# Data Caches & Vector Storage Caches
+.pytest_cache/
+.coverage
+htmlcov/

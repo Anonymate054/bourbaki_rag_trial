@@ -1,0 +1,20 @@
+[project]
+name = "reto3-rag-lfpiorpi"
+version = "0.1.0"
+description = "Arquitectura RAG Local para la Ley de Prevención y Lavado de Dinero (LFPIORPI) de México"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "sentence-transformers",
+    "faiss-cpu",
+    "polars",
+    "pandas",
+    "pyarrow",
+    "numpy",
+    "jupyter",
+    "ipykernel",
+    "matplotlib",
+    "seaborn",
+    "tqdm"
+]

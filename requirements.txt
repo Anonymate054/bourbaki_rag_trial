@@ -1,0 +1,21 @@
+# PyTorch with CUDA support (installed via index URL or uv)
+torch
+torchvision
+torchaudio
+
+# Embeddings & Vector Database
+sentence-transformers
+faiss-cpu
+
+# Data manipulation & Parquet
+polars
+pandas
+pyarrow
+numpy
+
+# Jupyter environment & visualization
+jupyter
+ipykernel
+matplotlib
+seaborn
+tqdm
