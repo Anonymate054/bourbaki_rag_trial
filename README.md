@@ -6,6 +6,43 @@ Designed to run **100% locally on GPU** for full privacy and zero API costs, whi
 
 ---
 
+## 📂 Project Directory Structure
+
+```
+bourbaki_rag_trial/
+├── app.py                       # Main Streamlit Web Application (RAG Playground & Visual Explorer)
+├── tunnel_manager.py            # Remote HTTPS Tunnel Controller (Cloudflare / NGROK)
+├── Compilado_LFPIORPI20mayo2021.txt # Source Mexican Anti-Money Laundering Law Text
+├── requirements.txt             # Project Python dependencies
+├── pyproject.toml               # Project metadata & build settings
+├── .env.example                 # Environment variables template for API keys
+├── .gitignore                   # Excludes sensitive data, logs, caches & binaries
+│
+├── notebooks/                   # Research & Empirical Benchmark Jupyter Notebooks
+│   ├── reto3_rag_local.ipynb                   # End-to-End Local RAG Implementation
+│   ├── reto3_busqueda_hibrida_rerank.ipynb     # Hybrid Search (RRF) & Re-ranking Benchmarks
+│   ├── reto3_benchmark_modelos_llm.ipynb       # Empirical Comparison of Local LLMs
+│   └── reto3_analisis_preprocesamiento_nlp.ipynb # Corpus Preprocessing & Normalization Analysis
+│
+├── src/                         # Modular RAG DAG Pipeline Package
+│   └── rag_pipeline/
+│       ├── config.py            # Global Pipeline Configuration & Absolute Path Resolvers
+│       ├── pipeline.py          # DAG Orchestrator Runner
+│       ├── memory.py            # Multi-Chat Conversation Memory Manager
+│       └── nodes/               # Modular DAG Nodes (Loader, Chunker, FAISS, BM25, RRF, Re-ranker, LLM)
+│
+├── scripts/                     # Helper Scripts & Automation Utilities
+│   ├── build_notebooks/         # Notebook Generation & Execution Utility Scripts
+│   └── utils/                   # Database Seeding & Chat Cleanup Utilities
+│
+└── tests/                       # Automated Test Suite & RPA Playwright Benchmarks
+    ├── test_rag_pipeline.py     # RAG Pipeline DAG Unit & End-to-End Tests
+    ├── test_rpa_mobile.py       # Mobile Viewport Playwright Responsiveness Test
+    └── test_rpa_playwright_full.py # Full RPA User Simulation Test
+```
+
+---
+
 ## 🌟 Key Features
 
 - **🔬 Real-Time RAG Playground**: Interactively tweak search algorithms (Dense Vector, Sparse Keyword, Hybrid RRF), Re-ranking, Article Router, and text preprocessing on the fly. Inspect cosine similarity scores, BM25 scores, Cross-Encoder attention scores, search latencies, and injected prompts in real time.

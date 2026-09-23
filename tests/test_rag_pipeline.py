@@ -13,6 +13,9 @@ from sentence_transformers import SentenceTransformer
 # Reconfigure stdout to UTF-8 for Windows console support
 sys.stdout.reconfigure(encoding='utf-8')
 
+# Ensure parent directory is in sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 def run_test():
     print("=" * 60)
     print("EJECUCION Y VERIFICACION END-TO-END DEL RAG LOCAL")
@@ -28,8 +31,9 @@ def run_test():
     else:
         device = torch.device("cpu")
         
-    # 2. Document Load
-    with open("Compilado_LFPIORPI20mayo2021.txt", "r", encoding="utf-8", errors="ignore") as f:
+    # 2. Document Load (Resolves root file relative path)
+    doc_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Compilado_LFPIORPI20mayo2021.txt"))
+    with open(doc_path, "r", encoding="utf-8", errors="ignore") as f:
         lines = f.readlines()
         
     cleaned_lines = [l for l in lines if not (re.search(r'--(?: \d+ of \d+ )?--', l.strip()) or "DIARIO OFICIAL" in l or "Primera Sección" in l)]
@@ -101,8 +105,9 @@ def run_test():
             "embedding": embeddings[i].tolist()
         })
     df_polars = pl.DataFrame(df_data)
-    df_polars.write_parquet("rag_chunks.parquet")
-    print(f"Archivo 'rag_chunks.parquet' guardado ({os.path.getsize('rag_chunks.parquet')/1024:.2f} KB).")
+    out_parquet = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "rag_chunks.parquet"))
+    df_polars.write_parquet(out_parquet)
+    print(f"Archivo 'rag_chunks.parquet' guardado ({os.path.getsize(out_parquet)/1024:.2f} KB).")
     
     # 6. FAISS Index
     dim = embeddings.shape[1]

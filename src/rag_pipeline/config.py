@@ -1,10 +1,12 @@
 import os
 from dataclasses import dataclass, field
 
+DEFAULT_DOC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "Compilado_LFPIORPI20mayo2021.txt"))
+
 @dataclass
 class PipelineConfig:
-    # Document Path
-    document_path: str = "Compilado_LFPIORPI20mayo2021.txt"
+    # Document Path (Resolves absolute path regardless of working directory)
+    document_path: str = field(default_factory=lambda: DEFAULT_DOC_PATH if os.path.exists(DEFAULT_DOC_PATH) else "Compilado_LFPIORPI20mayo2021.txt")
     
     # Embedding Config
     embedding_model_name: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
