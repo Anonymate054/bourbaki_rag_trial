@@ -31,14 +31,17 @@ def run_test():
     else:
         device = torch.device("cpu")
         
-    # 2. Document Load (Resolves root file relative path)
-    doc_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Compilado_LFPIORPI20mayo2021.txt"))
+    # 2. Document Load (Resolves data/ directory relative path)
+    data_doc_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "Compilado_LFPIORPI20mayo2021.txt"))
+    root_doc_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Compilado_LFPIORPI20mayo2021.txt"))
+    doc_path = data_doc_path if os.path.exists(data_doc_path) else root_doc_path
+    
     with open(doc_path, "r", encoding="utf-8", errors="ignore") as f:
         lines = f.readlines()
         
     cleaned_lines = [l for l in lines if not (re.search(r'--(?: \d+ of \d+ )?--', l.strip()) or "DIARIO OFICIAL" in l or "Primera Sección" in l)]
     text = "".join(cleaned_lines)
-    print(f"Documento cargado: {len(cleaned_lines):,} líneas, {len(text):,} caracteres.")
+    print(f"Documento cargado ({os.path.basename(doc_path)}): {len(cleaned_lines):,} líneas, {len(text):,} caracteres.")
     
     # 3. Structural Chunking
     art_pattern = r'(Artículo\s+(?:\d+|Único)(?:\s+Bis|\s+Ter|\s+Quáter)?\.\s*)'
@@ -105,9 +108,11 @@ def run_test():
             "embedding": embeddings[i].tolist()
         })
     df_polars = pl.DataFrame(df_data)
-    out_parquet = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "rag_chunks.parquet"))
+    out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data"))
+    os.makedirs(out_dir, exist_ok=True)
+    out_parquet = os.path.join(out_dir, "rag_chunks.parquet")
     df_polars.write_parquet(out_parquet)
-    print(f"Archivo 'rag_chunks.parquet' guardado ({os.path.getsize(out_parquet)/1024:.2f} KB).")
+    print(f"Archivo 'rag_chunks.parquet' guardado en data/ ({os.path.getsize(out_parquet)/1024:.2f} KB).")
     
     # 6. FAISS Index
     dim = embeddings.shape[1]
