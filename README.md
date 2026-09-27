@@ -19,6 +19,7 @@ bourbaki_rag_trial/
 ├── .gitignore                   # Excludes sensitive data, logs, caches & binaries
 │
 ├── notebooks/                   # Research & Empirical Benchmark Jupyter Notebooks
+│   ├── reto3_rag_respuestas_evaluacion.ipynb   # 📊 Pre-Executed Evaluation Notebook (Questions & Grounded Answers)
 │   ├── colab_rag_example.ipynb                 # 🚀 Google Colab Ready Notebook (Gemini + OpenAI API + NGROK)
 │   ├── reto3_rag_local.ipynb                   # End-to-End Local RAG Implementation
 │   ├── reto3_busqueda_hibrida_rerank.ipynb     # Hybrid Search (RRF) & Re-ranking Benchmarks
